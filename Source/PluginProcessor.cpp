@@ -21,8 +21,9 @@ TonkTremoloAudioProcessor::TonkTremoloAudioProcessor()
 #endif
 		.withOutput("Output", AudioChannelSet::stereo(), true)
 #endif
-	)
+	),
 #endif
+	parameterManager(*this)
 {
 }
 
@@ -161,7 +162,7 @@ void TonkTremoloAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuf
 //==============================================================================
 bool TonkTremoloAudioProcessor::hasEditor() const
 {
-	return true; // (change this to false if you choose to not supply an editor)
+	return false; // (change this to false if you choose to not supply an editor)
 }
 
 AudioProcessorEditor* TonkTremoloAudioProcessor::createEditor()

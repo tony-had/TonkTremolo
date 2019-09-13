@@ -7,6 +7,12 @@
               pluginRTASCategory="32,8192" pluginAAXCategory="32,8192">
   <MAINGROUP id="HnT8lS" name="TonkTremolo">
     <GROUP id="{EFB3DF8E-D9E3-DB96-18DD-8501183CEFA2}" name="Source">
+      <FILE id="mFg3Tt" name="TremoloParameters.h" compile="0" resource="0"
+            file="Source/TremoloParameters.h"/>
+      <FILE id="KtfyRk" name="ParameterManager.cpp" compile="1" resource="0"
+            file="Source/ParameterManager.cpp"/>
+      <FILE id="ADUVns" name="ParameterManager.h" compile="0" resource="0"
+            file="Source/ParameterManager.h"/>
       <FILE id="BiQe9v" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="MKoKVn" name="PluginProcessor.h" compile="0" resource="0"
