@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "ParameterManager.h"
+#include "LFO.h"
 
 //==============================================================================
 /**
@@ -57,6 +58,8 @@ public:
 	void setStateInformation(const void* data, int sizeInBytes) override;
 
 private:
+	std::unique_ptr<Lfo> lfo[2];
+
 	ParameterManager parameterManager;
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TonkTremoloAudioProcessor)

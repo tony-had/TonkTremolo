@@ -25,6 +25,8 @@ TonkTremoloAudioProcessor::TonkTremoloAudioProcessor()
 #endif
 	parameterManager(*this)
 {
+	lfo[0].reset(new Lfo());
+	lfo[1].reset(new Lfo());
 }
 
 TonkTremoloAudioProcessor::~TonkTremoloAudioProcessor()
@@ -96,14 +98,16 @@ void TonkTremoloAudioProcessor::changeProgramName(int index, const String& newNa
 //==============================================================================
 void TonkTremoloAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-	// Use this method as the place to do any pre-playback
-	// initialisation that you need..
+	lfo[0]->setSampleRate(sampleRate);
+	lfo[0]->setBufferSize(samplesPerBlock);
+	lfo[1]->setSampleRate(sampleRate);
+	lfo[1]->setBufferSize(samplesPerBlock);
 }
 
 void TonkTremoloAudioProcessor::releaseResources()
 {
-	// When playback stops, you can use this as an opportunity to free up any
-	// spare memory, etc.
+	lfo[0]->reset();
+	lfo[1]->reset();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -151,11 +155,23 @@ void TonkTremoloAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuf
 	// the samples and the outer loop is handling the channels.
 	// Alternatively, you can process the samples with the channels
 	// interleaved by keeping the same state.
+
 	for (int channel = 0; channel < totalNumInputChannels; ++channel)
 	{
 		auto* channelData = buffer.getWritePointer(channel);
 
-		// ..do something to the data...
+		float tremoloDepth = *parameterManager.valueTreeState.getRawParameterValue(tremoloFloatParameters[tremoloDepthParameter].parameterId);
+		float lfoFrequency = *parameterManager.valueTreeState.getRawParameterValue(tremoloFloatParameters[lfoFrequencyParameter].parameterId);
+
+		lfo[channel]->process(lfoFrequency, tremoloDepth, buffer.getNumSamples());
+		std::vector<float> lfoBuffer = lfo[channel]->getBuffer();
+
+		for (int i = 0; i < buffer.getNumSamples(); i++)
+		{
+			if (lfoBuffer[i] < 0.f)
+				lfoBuffer[i] = 0;
+			channelData[i] *= lfoBuffer[i];
+		}
 	}
 }
 
