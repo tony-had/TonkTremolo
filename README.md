@@ -10,7 +10,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![GPL License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
@@ -129,7 +129,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
 
 
 
@@ -151,7 +151,7 @@ Project Link: [https://github.com/tony-had/TonkTremolo](https://github.com/tony-
 [issues-shield]: https://img.shields.io/github/issues/tony-had/TonkTremolo.svg?style=flat-square
 [issues-url]: https://github.com/tony-had/TonkTremolo/issues
 [license-shield]: https://img.shields.io/github/license/tony-had/TonkTremolo.svg?style=flat-square
-[license-url]: https://github.com/tony-had/TonkTremolo/blob/master/LICENSE.txt
+[license-url]: https://github.com/tony-had/TonkTremolo/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/tonyhadjiivanov/
 [product-screenshot]: images/screenshot.png
