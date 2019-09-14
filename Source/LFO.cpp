@@ -58,3 +58,94 @@ float* Lfo::getBuffer()
 {
 	return &buffer[0];
 }
+
+float Lfo::triangleWave(float inPhase)
+{
+	float valueAtPhase;
+
+	if (inPhase > 0.25f && inPhase < 0.75f)
+	{
+		valueAtPhase = 2.f - 4 * inPhase;
+	}
+	else
+	{
+		valueAtPhase = 4 * inPhase;
+	}
+	return valueAtPhase;
+}
+
+float Lfo::sawWave(float inPhase)
+{
+	float valueAtPhase;
+
+	if (inPhase < 0.5f)
+	{
+		valueAtPhase = 2 * inPhase;
+	}
+	else
+	{
+		valueAtPhase = 2 * inPhase - 2.f;
+	}
+
+	return valueAtPhase;
+}
+
+float Lfo::inverseSawWave(float inPhase)
+{
+	float valueAtPhase;
+
+	if (inPhase < 0.5f)
+	{
+		valueAtPhase = -2 * inPhase;
+	}
+	else
+	{
+		valueAtPhase = -2 * inPhase + 2.f;
+	}
+
+	return valueAtPhase;
+}
+
+float Lfo::squareWave(float inPhase)
+{
+	float valueAtPhase;
+
+	if (inPhase < 0.5f)
+	{
+		valueAtPhase = 1.f;
+	}
+	else
+	{
+		valueAtPhase = -1.f;
+	}
+
+	return valueAtPhase;
+}
+
+float Lfo::slopedSquareWave(float inPhase)
+{
+	float valueAtPhase;
+
+	if (inPhase < 0.02f)
+	{
+		valueAtPhase = 50 * inPhase;
+	}
+	else if (inPhase < 0.48f)
+	{
+		valueAtPhase = 1.f;
+	}
+	else if (inPhase < 0.52f)
+	{
+		valueAtPhase = -50 * inPhase + 25.f;
+	}
+	else if (inPhase < 0.98f)
+	{
+		valueAtPhase = -1.f;
+	}
+	else
+	{
+		valueAtPhase = 50 * inPhase - 50.f;
+	}
+
+	return valueAtPhase;
+}

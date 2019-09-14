@@ -32,4 +32,10 @@ private:
 	int bufferSize;
 	float phase;
 	std::vector<float> buffer;
+
+	float triangleWave(float inPhase);
+	float sawWave(float inPhase);
+	float inverseSawWave(float inPhase);
+	float squareWave(float inPhase);
+	float slopedSquareWave(float inPhase);
 };
