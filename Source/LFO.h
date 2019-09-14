@@ -23,7 +23,7 @@ public:
 	void setSampleRate(double inSampleRate);
 	void setBufferSize(int inBufferSize);
 
-	void process(float frequency, float rangeMin, float rangeMax, int numberOfSamples);
+	void process(float frequency, float rangeMin, float rangeMax, int waveformType, int numberOfSamples);
 
 	float* getBuffer();
 

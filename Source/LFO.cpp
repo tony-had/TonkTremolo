@@ -39,7 +39,7 @@ void Lfo::setBufferSize(int inBufferSize)
 	buffer.resize(bufferSize);
 }
 
-void Lfo::process(float frequency, float rangeMin, float rangeMax, int numberOfSamples)
+void Lfo::process(float frequency, float rangeMin, float rangeMax, int waveformType, int numberOfSamples)
 {
 	std::vector<float>::iterator lfoBufferSample;
 	for (lfoBufferSample = buffer.begin(); lfoBufferSample != buffer.end(); lfoBufferSample++)
@@ -49,7 +49,36 @@ void Lfo::process(float frequency, float rangeMin, float rangeMax, int numberOfS
 		if (phase > 1.f)
 			phase -= 1.f;
 
-		const float lfoValue = sinf(phase * MathConstants<float>::twoPi);
+		float lfoValue;
+
+		switch (waveformType)
+		{
+			case 0: {
+				lfoValue = sinf(phase * MathConstants<float>::twoPi);
+				break;
+			}
+			case 1: {
+				lfoValue = triangleWave(phase);
+				break;
+			}
+			case 2: {
+				lfoValue = sawWave(phase);
+				break;
+			}
+			case 3: {
+				lfoValue = inverseSawWave(phase);
+				break;
+			}
+			case 4: {
+				lfoValue = squareWave(phase);
+				break;
+			}
+			case 5: {
+				lfoValue = slopedSquareWave(phase);
+				break;
+			}
+		}
+
 		*lfoBufferSample = jmap(lfoValue, -1.f, 1.f, rangeMin, rangeMax);
 	}
 }

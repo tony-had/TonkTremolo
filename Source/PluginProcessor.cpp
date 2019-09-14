@@ -158,8 +158,9 @@ void TonkTremoloAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuf
 
 		float tremoloDepth = *parameterManager.valueTreeState.getRawParameterValue(tremoloFloatParameters[tremoloDepthParameter].parameterId);
 		float lfoFrequency = *parameterManager.valueTreeState.getRawParameterValue(tremoloFloatParameters[lfoFrequencyParameter].parameterId);
+		int lfoWaveformType = *parameterManager.valueTreeState.getRawParameterValue(tremoloChoiceParameters[lfoWaveformTypeParameter].parameterId);
 
-		lfo[channel]->process(lfoFrequency, 1.f - tremoloDepth, 1.f, buffer.getNumSamples());
+		lfo[channel]->process(lfoFrequency, 1.f - tremoloDepth, 1.f, lfoWaveformType, buffer.getNumSamples());
 		float* lfoBuffer = lfo[channel]->getBuffer();
 
 		for (int i = 0; i < buffer.getNumSamples(); i++)
