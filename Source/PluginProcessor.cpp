@@ -98,16 +98,19 @@ void TonkTremoloAudioProcessor::changeProgramName(int index, const String& newNa
 //==============================================================================
 void TonkTremoloAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-	lfo[0]->setSampleRate(sampleRate);
-	lfo[0]->setBufferSize(samplesPerBlock);
-	lfo[1]->setSampleRate(sampleRate);
-	lfo[1]->setBufferSize(samplesPerBlock);
+	for (int i = 0; i < 2; i++)
+	{
+		lfo[i]->setSampleRate(sampleRate);
+		lfo[i]->setBufferSize(samplesPerBlock);
+	}
 }
 
 void TonkTremoloAudioProcessor::releaseResources()
 {
-	lfo[0]->reset();
-	lfo[1]->reset();
+	for (int i = 0; i < 2; i++)
+	{
+		lfo[i]->reset();
+	}
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -148,13 +151,6 @@ void TonkTremoloAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuf
 	// this code if your algorithm always overwrites all the output channels.
 	for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
 		buffer.clear(i, 0, buffer.getNumSamples());
-
-	// This is the place where you'd normally do the guts of your plugin's
-	// audio processing...
-	// Make sure to reset the state if your inner loop is processing
-	// the samples and the outer loop is handling the channels.
-	// Alternatively, you can process the samples with the channels
-	// interleaved by keeping the same state.
 
 	for (int channel = 0; channel < totalNumInputChannels; ++channel)
 	{
