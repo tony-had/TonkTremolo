@@ -39,7 +39,7 @@ void Lfo::setBufferSize(int inBufferSize)
 	buffer.resize(bufferSize);
 }
 
-void Lfo::process(float frequency, float depth, int numberOfSamples)
+void Lfo::process(float frequency, float rangeMin, float rangeMax, int numberOfSamples)
 {
 	std::vector<float>::iterator lfoBufferSample;
 	for (lfoBufferSample = buffer.begin(); lfoBufferSample != buffer.end(); lfoBufferSample++)
@@ -49,12 +49,12 @@ void Lfo::process(float frequency, float depth, int numberOfSamples)
 		if (phase > 1.f)
 			phase -= 1.f;
 
-		const float lfoValue = sinf(phase * MathConstants<float>::twoPi) * depth;
-		*lfoBufferSample = lfoValue;
+		const float lfoValue = sinf(phase * MathConstants<float>::twoPi);
+		*lfoBufferSample = jmap(lfoValue, -1.f, 1.f, rangeMin, rangeMax);
 	}
 }
 
-std::vector<float> Lfo::getBuffer()
+float* Lfo::getBuffer()
 {
-	return buffer;
+	return &buffer[0];
 }

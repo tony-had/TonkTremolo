@@ -23,9 +23,9 @@ public:
 	void setSampleRate(double inSampleRate);
 	void setBufferSize(int inBufferSize);
 
-	void process(float frequency, float depth, int numberOfSamples);
+	void process(float frequency, float rangeMin, float rangeMax, int numberOfSamples);
 
-	std::vector<float> getBuffer();
+	float* getBuffer();
 
 private:
 	double sampleRate;
