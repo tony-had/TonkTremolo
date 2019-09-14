@@ -44,7 +44,7 @@ struct TremoloChoiceParameter
 
 static TremoloFloatParameter tremoloFloatParameters[totalNumFloatParameters] = 
 {
-	{"TremoloDepth", "Tremolo Depth", NormalisableRange<float>(0.f, 100.f), 50.f, "%"},
+	{"TremoloDepth", "Tremolo Depth", NormalisableRange<float>(0.f, 1.f), 50.f, ""},
 	{"LfoFrequency", "LFO Frequency", NormalisableRange<float>(0.f, 20.f), 1.f, "Hz"}
 };
 
