@@ -92,13 +92,17 @@ float Lfo::triangleWave(float inPhase)
 {
 	float valueAtPhase;
 
-	if (inPhase > 0.25f && inPhase < 0.75f)
+	if (inPhase < 0.25f)
+	{
+		valueAtPhase = 4 * inPhase;
+	}
+	else if (inPhase < 0.75f)
 	{
 		valueAtPhase = 2.f - 4 * inPhase;
 	}
 	else
 	{
-		valueAtPhase = 4 * inPhase;
+		valueAtPhase = 4 * inPhase - 4.f;
 	}
 	return valueAtPhase;
 }
